@@ -1,11 +1,17 @@
 from django.shortcuts import get_object_or_404, render_to_response
 from django.conf import settings
+from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseBadRequest
 from models import MultiuploaderImage
 from django.core.files.uploadedfile import UploadedFile
 
 #importing json parser to generate jQuery plugin friendly json response
 from django.utils import simplejson
+
+#import self app model & form
+from ServiceSite.multiuploader.models import MultiuploaderImage
+from ServiceSite.multiuploader.templatetags.multiuploader import multiupform
+
 
 #for generating thumbnails
 #sorl-thumbnails must be installed and properly configured
@@ -91,7 +97,18 @@ def multiuploader(request):
             mimetype = 'text/plain'
         return HttpResponse(response_data, mimetype=mimetype)
     else: #GET
-        return HttpResponse('Only POST accepted')
+		#return HttpResponse('GET page')
+		form = multiupform()  # A empty, unbound form
+
+		# Load documents for the list page
+		files = MultiuploaderImage.objects.all()
+		
+		# Render list page with the documents and the form
+		return render_to_response(
+			'multiuploader/multiuploader_list.html',
+			{'files': files, 'form': form},
+			context_instance=RequestContext(request)
+		)
 
 def multi_show_uploaded(request, key):
     """Simple file view helper.

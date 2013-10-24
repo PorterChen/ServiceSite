@@ -11,7 +11,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('', ''),
+     ('porter chen', 'chavicoma@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -136,18 +136,22 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'djcelery',
     'uploadsfiles',
+	'django-log-file-viewer',
 )
 
 
 MULTI_FILE_DELETE_URL = 'multi_delete'
 MULTI_IMAGE_URL = 'multi_image'
-MULTI_IMAGES_FOLDER = 'frames/%Y-%m-%d--%H-%M'
+MULTI_IMAGES_FOLDER = 'CVTO_server_program/frames/'
 
-# A sample logging configuration. The only tangible logging
+# A sample logging configuration. The Honly tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error when DEBUG=False.
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configurations.
+
+LOG_FILES_DIR = os.path.join(PROJECT_ROOT, 'testdata', 'log')
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <body>
+	<!-- List of uploaded documents -->
+	{% if files %}
+		<ul>
+		{% for MultiuploaderImage in files %}
+			<li><a href="{{ MultiuploaderImage.image.url }}">{{ MultiuploaderImage.image.name }}</a></li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<p>No files in Database.</p>
+	{% endif %}
+
+		<!-- Upload form. Note enctype attribute! -->
+		<form action="{% url "list" %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<p>{{ form.non_field_errors }}</p>
+			<p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+			<p>
+				{{ form.docfile.errors }}
+			    {{ form.docfile }}
+			</p>			
+		</form>
+	</body>
+</html> 
