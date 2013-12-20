@@ -5,7 +5,7 @@ from django.conf import settings
 try:
     storage = settings.MULTI_IMAGES_FOLDER+'/'
 except AttributeError:
-    storage = 'multiuploader_images/'
+    storage = 'multiuploader_image/'
 
 class MultiuploaderImage(models.Model):
     """Model for storing uploaded photos"""
